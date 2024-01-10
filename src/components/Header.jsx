@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "./Container";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
@@ -17,8 +17,9 @@ const Wrapper = styled.div`
 	padding: 2rem 0;
 `;
 
-const Title = styled.a.attrs({
-	href: "/",
+/* Стилизуем компонент react-router-dom */
+const Title = styled(Link).attrs({
+	to: "/",
 })`
 	color: var(--colors-text);
 	font-size: var(--fs-sm);
