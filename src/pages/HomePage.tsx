@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Controls } from "../components/Controls";
-import { ALL_COUNTRIES } from "../constants/api";
+
 import { List } from "../components/List";
 import { Card } from "../components/Card";
+import { Country } from "../App";
 
-export const HomePage = ({ countries, setCountries }) => {
-	const [filteredCountries, setFilteredCountries] = useState(countries);
+
+interface IHomePage {
+	countries: Country[];
+}
+
+export const HomePage = ({ countries }: IHomePage) => {
+	const [filteredCountries, setFilteredCountries] = useState<Country[]>(countries);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		// Избегаем повторных запросов
-		if (!countries.length) {
-			axios.get(ALL_COUNTRIES).then(({ data }) => {
-				setCountries(data);
-			});
-		}
-	}, []);
-
+	console.log(countries)
 	// Т.к изначально мы получаем пустой массив, нужно обновить стейт после получения данных с сервера
 	useEffect(() => {
 		handleSearch();
 	}, [countries]);
 
-	const handleSearch = (search, region) => {
+	const handleSearch = (search: string = '', region: string = '') => {
 		let data = [...countries];
 
 		if (region) {

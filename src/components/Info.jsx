@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { filterByCode } from "../constants/api";
 import { useNavigate } from "react-router-dom";
+import { Country } from "../App";
 
 const Wrapper = styled.section`
 	margin-top: 3rem;
@@ -99,7 +100,17 @@ const Tag = styled.span`
 	cursor: pointer;
 `;
 
-export const Info = (props) => {
+/* interface IInfo extends Country {
+	subregion: string;
+	tld: [string];
+	currencies: {};
+	languages: {
+		language: string;
+	};
+	borders?: [];
+} */
+
+export const Info = (props/* : IInfo */) => {
 	const {
 		name: { common, nativeName },
 		flags,
@@ -111,9 +122,8 @@ export const Info = (props) => {
 		currencies = [],
 		languages = [],
 		borders = [],
-		/* navigationLink, */
 	} = props;
-
+	console.log(props);
 	const [neighbors, setNeighbors] = useState([]);
 
 	useEffect(() => {
@@ -150,7 +160,8 @@ export const Info = (props) => {
 							<b>Subregion: </b> {subregion}
 						</ListItem>
 						<ListItem>
-							<b>Capital: </b> {capital[0]}
+							{/* Macau не имеет столицы */}
+							<b>Capital: </b> {capital?.[0]}
 						</ListItem>
 					</List>
 					<List>

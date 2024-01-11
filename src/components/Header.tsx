@@ -17,8 +17,12 @@ const Wrapper = styled.div`
 	padding: 2rem 0;
 `;
 
+interface TitleProps {
+	to?: string;
+}
+
 /* Стилизуем компонент react-router-dom */
-const Title = styled(Link).attrs({
+const Title = styled(Link).attrs<TitleProps>({
 	to: "/",
 })`
 	color: var(--colors-text);
@@ -34,8 +38,8 @@ const ModeSwitcher = styled.div`
 	text-transform: capitalize;
 `;
 
-export const Header = () => {
-	const [theme, setTheme] = useState("light");
+export const Header: React.FC = () => {
+	const [theme, setTheme] = useState<'dark' | 'light'>("light");
 
 	const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 

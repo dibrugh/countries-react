@@ -21,6 +21,10 @@ const Wrapper = styled.section`
 	}
 `;
 
-export const List = ({ children }) => {
+interface IList {
+	children: React.ReactNode;
+}
+
+export const List = ({ children }: IList) => {
 	return <Wrapper>{children}</Wrapper>;
 };

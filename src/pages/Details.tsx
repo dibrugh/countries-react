@@ -13,7 +13,7 @@ export const Details = () => {
 
 	const [country, setCountry] = useState(null);
 	useEffect(() => {
-		axios.get(searchByCountry(name)).then(({ data }) => setCountry(data[0]));
+		axios.get(searchByCountry(name as string)).then(({ data }) => setCountry(data[0]));
 	}, [name]);
 
 	return (
@@ -21,7 +21,7 @@ export const Details = () => {
 			<Button onClick={() => navigate(-1)}>
 				<IoArrowBack /> Back
 			</Button>
-			{country && <Info /* navigationLink={navigationLink} */ {...country} />}
+			{country && <Info {...country as object} />}
 		</div>
 	);
 };

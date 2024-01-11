@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
     "axios": "^1.6.5",
     "cra-template": "1.2.0",
     "react": "^18.2.0",
@@ -11,7 +15,8 @@
     "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "typescript": "^5.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

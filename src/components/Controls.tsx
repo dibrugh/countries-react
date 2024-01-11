@@ -24,12 +24,17 @@ const options = [
 	{ value: "Oceania", label: "Oceania" },
 ];
 
-export const Controls = ({ onSearch }) => {
+interface IControls {
+	onSearch: (search: string, regionValue: string) => void;
+}
+
+export const Controls = ({ onSearch }: IControls) => {
 	const [search, setSearch] = useState("");
-	const [region, setRegion] = useState("");
+	// тип any....
+	const [region, setRegion] = useState<any>("");
 
 	useEffect(() => {
-		const regionValue = region?.value || "";
+		const regionValue = region.value || "";
 		onSearch(search, regionValue);
 	}, [search, region]);
 

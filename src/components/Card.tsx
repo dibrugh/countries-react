@@ -34,17 +34,29 @@ const CardList = styled.ul`
 `;
 
 const CardListItem = styled.li`
-	font-size: var(--fs-sm)l
-    line-height: 1.5;
-    font-weight: var(--fw-light);
-    
-    // Стилизуем <b>
-		& > b {
+	font-size: var(--fs-sm);
+	line-height: 1.5;
+	font-weight: var(--fw-light);
+
+	// Стилизуем <b>
+	& > b {
 		font-weight: var(--fw-bold);
 	}
 `;
 
-export const Card = ({ img, name, info = [], onClick }) => {
+interface Info {
+	title: string;
+	description: string | number;
+}
+
+interface ICard {
+	img: string;
+	name: string;
+	info: Info[];
+	onClick: () => void;
+}
+
+export const Card = ({ img, name, info = [], onClick }: ICard) => {
 	return (
 		<Wrapper onClick={onClick}>
 			<CardImage src={img} alt={name} />

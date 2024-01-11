@@ -29,7 +29,12 @@ const Input = styled.input.attrs({
 	background-color: var(--colors-ui-base);
 `;
 
-function Search({ search, setSearch }) {
+interface ISearch {
+	search: string;
+	setSearch: (e: string) => void;
+}
+
+function Search({ search, setSearch }: ISearch) {
 	return (
 		<InputContainer>
 			<IoSearch />
