@@ -1,10 +1,12 @@
+import { useState } from "react";
+
 import { Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Main } from "./components/Main";
 import { HomePage } from "./pages/HomePage";
 import { NotFound } from "./pages/NotFound";
 import { Details } from "./pages/Details";
-import { useState } from "react";
+
 
 function App() {
 	// Чтобы каждый раз не подгружать страны, выносим стейт на уровень выше (т.е App)

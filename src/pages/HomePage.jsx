@@ -1,26 +1,50 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import { Controls } from "../components/Controls";
 import { ALL_COUNTRIES } from "../constants/api";
 import { List } from "../components/List";
 import { Card } from "../components/Card";
 
 export const HomePage = ({ countries, setCountries }) => {
+	const [filteredCountries, setFilteredCountries] = useState(countries);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-        // Избегаем повторных запросов
-        if (!countries.length)
-		axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
+		// Избегаем повторных запросов
+		if (!countries.length) {
+			axios.get(ALL_COUNTRIES).then(({ data }) => {
+				setCountries(data);
+			});
+		}
 	}, []);
-    
+
+	// Т.к изначально мы получаем пустой массив, нужно обновить стейт после получения данных с сервера
+	useEffect(() => {
+		handleSearch();
+	}, [countries]);
+
+	const handleSearch = (search, region) => {
+		let data = [...countries];
+
+		if (region) {
+			data = data.filter((country) => country.region.includes(region));
+		}
+		// Проверяем совпадение с текстом поисковой строки
+		if (search) {
+			data = data.filter((country) =>
+				country.name.common.toLowerCase().includes(search.toLowerCase())
+			);
+		}
+		// Отфильтрованные страны
+		setFilteredCountries(data);
+	};
+
 	return (
 		<>
-			<Controls />
+			<Controls onSearch={handleSearch} />
 			<List>
-				{countries.map((el) => {
+				{filteredCountries.map((el) => {
 					/* Подготовка данных */
 					const countryInfo = {
 						img: el.flags.png,

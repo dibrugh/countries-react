@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "./Search";
 import { CustomSelect } from "./CustomSelect";
 
@@ -24,9 +24,14 @@ const options = [
 	{ value: "Oceania", label: "Oceania" },
 ];
 
-export const Controls = () => {
+export const Controls = ({ onSearch }) => {
 	const [search, setSearch] = useState("");
 	const [region, setRegion] = useState("");
+
+	useEffect(() => {
+		const regionValue = region?.value || "";
+		onSearch(search, regionValue);
+	}, [search, region]);
 
 	return (
 		<Wrapper>
